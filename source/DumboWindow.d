@@ -10,12 +10,20 @@ import gtk.MenuItem;
 import gtk.AccelGroup;
 import gtk.VBox;
 import gtk.FileChooserDialog;
+import gtk.Paned;
+import gtk.Label;
 
 import Dumbo.Constants;
+import Dumbo.RecordTreeView;
+import Dumbo.RecordTreeStore;
+import Dumbo.Backends.SqliteBackend;
+import Dumbo.SidebarListStore;
+import Dumbo.SidebarTreeView;
 
 class DumboWindow : MainWindow {
 
     MenuBar menuBar;
+    VBox mainBox;
 
     this() {
 
@@ -24,11 +32,26 @@ class DumboWindow : MainWindow {
         this.setDefaultSize(Constants.windowDefaultWidth,
                 Constants.windowDefaultHeight);
 
-        // Create basic layout
-        VBox mainBox = new VBox(false, 0);
+        // Create main box 
+        mainBox = new VBox(false, 0);
 
         // Create menubar
         mainBox.packStart(this.getMenuBar(),false,false,0);
+        
+        // Basic layout
+        Paned paned = new Paned(Orientation.HORIZONTAL);
+
+        // Sidebar view
+        auto sidebarListStore = new SidebarListStore();
+        auto sidebarTreeView = new SidebarTreeView(sidebarListStore);
+        paned.add1(sidebarTreeView);
+
+        // Table view
+        auto recordListStore = new RecordTreeStore();
+        auto recordTreeView = new RecordTreeView(recordListStore, new SqliteBackend("test.db"));
+        paned.add2(recordTreeView);
+
+        mainBox.packStart(paned, true, true, 0);
 
         this.add(mainBox);
 

@@ -1,4 +1,4 @@
-module RecordTreeStore;
+module Dumbo.RecordTreeStore;
 
 private import gtk.ListStore;
 private import gtk.TreeIter;
@@ -18,3 +18,4 @@ class RecordTreeStore : ListStore
         setValue(iter, 1, capital);
     }
 }
+
