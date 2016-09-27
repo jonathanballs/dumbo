@@ -2,3 +2,7 @@ name "dumbo"
 description "A minimal D application."
 copyright "Copyright © 2016, jonathan"
 authors "jonathan"
+
+dependency "gtk-d" version="~>3.3.1"
+dependency "sqlite-d" version="~>0.1.0"
+

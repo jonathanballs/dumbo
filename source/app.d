@@ -1,6 +1,22 @@
-import std.stdio;
+import gtk.MainWindow;
+import gtk.Box;
+import gtk.Main;
 
-void main()
+import RecordTreeView;
+import RecordTreeStore;
+import Dumbo.DumboWindow;
+
+void main(string[] args)
 {
-	writeln("Edit source/app.d to start your project.");
+    Main.init(args);
+    MainWindow win = new DumboWindow();
+ 
+    //auto countryListStore = new RecordTreeStore();
+    
+    //auto countryTreeView = new RecordTreeView(countryListStore, new SqliteBackend("test.db"));
+    //box.packStart(countryTreeView, true, true, 0);
+ 
+    win.showAll();
+    Main.run();
 }
+

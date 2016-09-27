@@ -5,3 +5,8 @@ __dummy.html
 *.obj
 
 dumbo
+*.sw?
+*\~
+*#
+
+dub.selections.json
