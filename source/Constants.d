@@ -6,7 +6,7 @@ static class Constants {
     static string programVersion = "0.0.1";
 
     // Window size
-    static int windowDefaultWidth = 800;
-    static int windowDefaultHeight = 500;
+    static int windowDefaultWidth = 1000;
+    static int windowDefaultHeight = 700;
 }
 

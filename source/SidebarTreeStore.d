@@ -13,6 +13,7 @@ class SidebarTreeStore : TreeStore
         TreeIter tableIter = createIter();
         setValue(tableIter, 0, "Tables");
 
+        // Foreach table
         TreeIter noneIter;
         insert(noneIter, tableIter, 0); 
         setValue(noneIter, 0, "None");
@@ -20,6 +21,5 @@ class SidebarTreeStore : TreeStore
         TreeIter viewsIter = createIter();
         setValue(viewsIter, 0, "Views");
     }
-
 }
 

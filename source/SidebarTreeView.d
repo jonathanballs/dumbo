@@ -1,9 +1,11 @@
 module Dumbo.SidebarTreeView;
 
-private import gtk.TreeView;
-private import gtk.TreeViewColumn;
-private import gtk.CellRendererText;
-private import gtk.TreeStore;
+import gtk.TreeView;
+import gtk.TreeViewColumn;
+import gtk.CellRendererText;
+import gtk.TreeStore;
+import gtk.StyleContext;
+import gdk.RGBA;
 
 class SidebarTreeView : TreeView
 {
@@ -20,6 +22,12 @@ class SidebarTreeView : TreeView
         }
 
         this.setHeadersVisible(false);
+
+        // Sets the colors. These are stolen from nautilus.
+        RGBA color = new RGBA(222/256.0, 222/256.0, 222/256.0);
+        this.overrideBackgroundColor(GtkStateFlags.NORMAL, color);
+        color = new RGBA(122/256.0, 125/256.0, 129/256.0);
+        this.overrideBackgroundColor(GtkStateFlags.SELECTED, color);
 
         setModel(store);
     }

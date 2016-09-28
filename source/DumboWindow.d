@@ -37,7 +37,7 @@ class DumboWindow : MainWindow {
 
         // Create menubar
         mainBox.packStart(this.getMenuBar(),false,false,0);
-        
+
         // Basic layout
         Paned paned = new Paned(Orientation.HORIZONTAL);
 
