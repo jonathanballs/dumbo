@@ -9,5 +9,6 @@ static class Constants {
     static int windowDefaultWidth = 1000;
     static int windowDefaultHeight = 700;
     static int sidebarMinimumWidth = 200;
+    static int sidebarItemPadding = 6;
 }
 

@@ -7,19 +7,20 @@ import gtk.TreeStore;
 import gtk.StyleContext;
 import gdk.RGBA;
 
+import Dumbo.Constants;
+
 class SidebarTreeView : TreeView
 {
     
     this(TreeStore store)
     {        
-        size_t i = 0;
-        foreach (columnName; [""]) {
-            TreeViewColumn newColumn = new TreeViewColumn(
-                    columnName, new CellRendererText(), "text", 0);
-            appendColumn(newColumn);
+        auto cellRenderer = new CellRendererText();
+        cellRenderer.setPadding(0, Constants.sidebarItemPadding);
+        // A column for holding table/view names
+        TreeViewColumn newColumn = new TreeViewColumn(
+                "name", cellRenderer, "text", 0);
+        appendColumn(newColumn);
 
-            i++;
-        }
 
         this.setHeadersVisible(false);
 
