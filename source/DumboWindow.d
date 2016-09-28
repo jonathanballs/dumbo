@@ -44,7 +44,8 @@ class DumboWindow : MainWindow {
         // Sidebar view
         auto sidebarTreeStore = new SidebarTreeStore();
         auto sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
-        paned.add1(sidebarTreeView);
+        sidebarTreeView.setSizeRequest(Constants.sidebarMinimumWidth, -1);
+        paned.pack1(sidebarTreeView, false, false);
 
         // Table view
         auto recordListStore = new RecordListStore();

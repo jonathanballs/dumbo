@@ -5,8 +5,9 @@ static class Constants {
     static string programName = "Dumbo";
     static string programVersion = "0.0.1";
 
-    // Window size
+    // GUI sizes
     static int windowDefaultWidth = 1000;
     static int windowDefaultHeight = 700;
+    static int sidebarMinimumWidth = 200;
 }
 
