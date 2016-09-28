@@ -11,8 +11,9 @@ private import Dumbo.Backends.DatabaseBackend;
 class RecordTreeView : TreeView
 {
     
-    this(ListStore store, DatabaseBackend backend)
+    this(ListStore store)
     {        
+        /*
         size_t i = 0;
         foreach (columnName; backend.getColumnNames("tableName")) {
             TreeViewColumn newColumn = new TreeViewColumn(
@@ -21,6 +22,7 @@ class RecordTreeView : TreeView
 
             i++;
         }
+        */
         
         setModel(store);
     }

@@ -14,18 +14,20 @@ import gtk.Paned;
 import gtk.Label;
 
 import Dumbo.Constants;
-import Dumbo.Backends.SqliteBackend;
 import Dumbo.RecordTreeView;
 import Dumbo.RecordListStore;
 import Dumbo.SidebarTreeStore;
 import Dumbo.SidebarTreeView;
+import Dumbo.DumboController;
 
 class DumboWindow : MainWindow {
 
     MenuBar menuBar;
     VBox mainBox;
+    DumboController controller;
 
-    this() {
+    this(DumboController mController) {
+        this.controller = mController;
 
         // Set name and size
         super(Constants.programName);
@@ -49,7 +51,7 @@ class DumboWindow : MainWindow {
 
         // Table view
         auto recordListStore = new RecordListStore();
-        auto recordTreeView = new RecordTreeView(recordListStore, new SqliteBackend("test.db"));
+        auto recordTreeView = new RecordTreeView(recordListStore);
         paned.add2(recordTreeView);
 
         mainBox.packStart(paned, true, true, 0);

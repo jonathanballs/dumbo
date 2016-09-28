@@ -1,19 +1,9 @@
-import gtk.MainWindow;
-import gtk.Box;
-import gtk.Main;
-
-import Dumbo.DumboWindow;
+import Dumbo.DumboController;
 
 void main(string[] args)
 {
-    Main.init(args);
-    MainWindow win = new DumboWindow();
- 
-    //auto countryListStore = new RecordTreeStore();
-    //auto countryTreeView = new RecordTreeView(countryListStore, new SqliteBackend("test.db"));
-    //box.packStart(countryTreeView, true, true, 0);
- 
-    win.showAll();
-    Main.run();
+    DumboController controller = new DumboController();
+    controller.setArgs(args);
+    controller.start();
 }
 

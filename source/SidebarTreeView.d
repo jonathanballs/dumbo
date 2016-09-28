@@ -15,7 +15,7 @@ class SidebarTreeView : TreeView
     this(TreeStore store)
     {        
         auto cellRenderer = new CellRendererText();
-        cellRenderer.setPadding(0, Constants.sidebarItemPadding);
+        cellRenderer.setPadding(Constants.sidebarItemHPadding, Constants.sidebarItemVPadding);
         // A column for holding table/view names
         TreeViewColumn newColumn = new TreeViewColumn(
                 "name", cellRenderer, "text", 0);
