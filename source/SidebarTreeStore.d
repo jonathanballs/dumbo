@@ -1,26 +1,34 @@
 module Dumbo.SidebarTreeStore;
 
-private import gtk.TreeStore;
-private import gtk.TreeIter;
-private import gtkc.gobjecttypes;
+import gtk.TreeStore;
+import gtk.TreeIter;
+import gtkc.gobjecttypes;
 
-class SidebarTreeStore : TreeStore
-{
-    this()
+import Dumbo.DumboController;
+
+class SidebarTreeStore : TreeStore {
+
+    DumboController controller;
+    TreeIter tablesIter;
+    TreeIter viewsIter;
+    TreeIter triggersIter;
+
+    this(DumboController mController)
     {
         super([GType.STRING]);
 
-        // Tables
-        TreeIter tableIter = createIter();
-        setValue(tableIter, 0, "Tables");
+        this.controller = mController;
 
-        // Foreach table
+        // Tables
+        tablesIter = createIter();
+        setValue(tablesIter, 0, "Tables");
+
         TreeIter noneIter;
-        insert(noneIter, tableIter, 0); 
+        insert(noneIter, tablesIter, 0); 
         setValue(noneIter, 0, "None");
 
         // Views
-        TreeIter viewsIter = createIter();
+        viewsIter = createIter();
         setValue(viewsIter, 0, "Views");
 
         TreeIter viewsNoneIter;
@@ -29,12 +37,25 @@ class SidebarTreeStore : TreeStore
 
 
         // Triggers
-        TreeIter triggersIter = createIter();
+        triggersIter = createIter();
         setValue(triggersIter, 0, "Triggers");
 
         TreeIter triggersNoneIter;
         insert(triggersNoneIter, triggersIter, 0); 
         setValue(triggersNoneIter, 0, "None");
+    }
+
+    public void update() {
+        string[] tableNames = this.controller.getDatabaseBackend().getTableNames();
+
+        int i = 0;
+        foreach (tableName; tableNames) {
+            TreeIter noneIter;
+            insert(noneIter, tablesIter, 0); 
+            setValue(noneIter, 0, tableName);
+            i++;
+        }
+
     }
 }
 

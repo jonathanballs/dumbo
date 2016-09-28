@@ -1,12 +1,10 @@
 module Dumbo.RecordTreeView;
 
-private import gtk.TreeView;
-private import gtk.TreeViewColumn;
-private import gtk.ListStore;
-private import gtk.CellRendererText;
-private import gtk.ListStore;
-
-private import Dumbo.Backends.DatabaseBackend;
+import gtk.TreeView;
+import gtk.TreeViewColumn;
+import gtk.ListStore;
+import gtk.CellRendererText;
+import gtk.ListStore;
 
 class RecordTreeView : TreeView
 {

@@ -25,6 +25,10 @@ class DumboWindow : MainWindow {
     MenuBar menuBar;
     VBox mainBox;
     DumboController controller;
+    SidebarTreeStore sidebarTreeStore;
+    SidebarTreeView sidebarTreeView;
+    RecordListStore recordListStore;
+    RecordTreeView recordTreeView;
 
     this(DumboController mController) {
         this.controller = mController;
@@ -44,14 +48,14 @@ class DumboWindow : MainWindow {
         Paned paned = new Paned(Orientation.HORIZONTAL);
 
         // Sidebar view
-        auto sidebarTreeStore = new SidebarTreeStore();
-        auto sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
+        sidebarTreeStore = new SidebarTreeStore(this.controller);
+        sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
         sidebarTreeView.setSizeRequest(Constants.sidebarMinimumWidth, -1);
         paned.pack1(sidebarTreeView, false, false);
 
-        // Table view
-        auto recordListStore = new RecordListStore();
-        auto recordTreeView = new RecordTreeView(recordListStore);
+        // Records view
+        recordListStore = new RecordListStore();
+        recordTreeView = new RecordTreeView(recordListStore);
         paned.add2(recordTreeView);
 
         mainBox.packStart(paned, true, true, 0);
@@ -98,6 +102,11 @@ class DumboWindow : MainWindow {
         }
 
         return;
+    }
+
+
+    void onNewDatabase() {
+        sidebarTreeStore.update();
     }
 
 }

@@ -3,10 +3,10 @@ docs.json
 __dummy.html
 *.o
 *.obj
-
-dumbo
 *.sw?
 *\~
 *#
+*.db
 
+dumbo
 dub.selections.json
