@@ -2,14 +2,13 @@ module Dumbo.SidebarTreeView;
 
 private import gtk.TreeView;
 private import gtk.TreeViewColumn;
-private import gtk.ListStore;
 private import gtk.CellRendererText;
-private import gtk.ListStore;
+private import gtk.TreeStore;
 
 class SidebarTreeView : TreeView
 {
     
-    this(ListStore store)
+    this(TreeStore store)
     {        
         size_t i = 0;
         foreach (columnName; [""]) {

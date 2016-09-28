@@ -14,10 +14,10 @@ import gtk.Paned;
 import gtk.Label;
 
 import Dumbo.Constants;
-import Dumbo.RecordTreeView;
-import Dumbo.RecordTreeStore;
 import Dumbo.Backends.SqliteBackend;
-import Dumbo.SidebarListStore;
+import Dumbo.RecordTreeView;
+import Dumbo.RecordListStore;
+import Dumbo.SidebarTreeStore;
 import Dumbo.SidebarTreeView;
 
 class DumboWindow : MainWindow {
@@ -42,12 +42,12 @@ class DumboWindow : MainWindow {
         Paned paned = new Paned(Orientation.HORIZONTAL);
 
         // Sidebar view
-        auto sidebarListStore = new SidebarListStore();
-        auto sidebarTreeView = new SidebarTreeView(sidebarListStore);
+        auto sidebarTreeStore = new SidebarTreeStore();
+        auto sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
         paned.add1(sidebarTreeView);
 
         // Table view
-        auto recordListStore = new RecordTreeStore();
+        auto recordListStore = new RecordListStore();
         auto recordTreeView = new RecordTreeView(recordListStore, new SqliteBackend("test.db"));
         paned.add2(recordTreeView);
 

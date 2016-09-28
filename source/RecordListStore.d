@@ -1,10 +1,10 @@
-module Dumbo.RecordTreeStore;
+module Dumbo.RecordListStore;
 
 private import gtk.ListStore;
 private import gtk.TreeIter;
 private import gtkc.gobjecttypes;
 
-class RecordTreeStore : ListStore
+class RecordListStore : ListStore
 {
     this()
     {
