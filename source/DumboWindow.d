@@ -12,6 +12,7 @@ import gtk.VBox;
 import gtk.FileChooserDialog;
 import gtk.Paned;
 import gtk.Label;
+import gtk.ScrolledWindow;
 
 import Dumbo.Constants;
 import Dumbo.RecordTreeView;
@@ -50,8 +51,11 @@ class DumboWindow : MainWindow {
         // Sidebar view
         sidebarTreeStore = new SidebarTreeStore(this.controller);
         sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
-        sidebarTreeView.setSizeRequest(Constants.sidebarMinimumWidth, -1);
-        paned.pack1(sidebarTreeView, false, false);
+
+        ScrolledWindow sidebarScroll = new ScrolledWindow();
+        sidebarScroll.setSizeRequest(Constants.sidebarMinimumWidth, -1);
+        sidebarScroll.add(sidebarTreeView);
+        paned.pack1(sidebarScroll, false, false);
 
         // Records view
         recordListStore = new RecordListStore();

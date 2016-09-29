@@ -8,9 +8,9 @@ import gtk.ListStore;
 
 class RecordTreeView : TreeView
 {
-    
+
     this(ListStore store)
-    {        
+    {
         /*
         size_t i = 0;
         foreach (columnName; backend.getColumnNames("tableName")) {
@@ -21,7 +21,7 @@ class RecordTreeView : TreeView
             i++;
         }
         */
-        
+
         setModel(store);
     }
 }
