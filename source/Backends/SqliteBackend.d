@@ -1,5 +1,8 @@
 module Dumbo.Backends.SqliteBackend;
 
+import std.typecons : Nullable;
+import std.stdio;
+import d2sqlite3;
 import Dumbo.Backends.DatabaseBackend;
 
 class SqliteBackend : DatabaseBackend {
@@ -11,11 +14,22 @@ class SqliteBackend : DatabaseBackend {
     }
 
     public string getName() {
-        return "ayy lmao";
+        return databaseName;
     }
 
     public string[] getTableNames() {
-        return ["users", "books", "other"];
+        string statement = "SELECT name FROM sqlite_master WHERE type = 'table'";
+        string[] names;
+
+        auto db = Database(databaseName);
+        ResultRange results = db.execute(statement);
+        foreach (Row row; results) {
+            string name = row.peek!string(0);
+            names ~= name;
+        }
+        db.close();
+
+        return names;
     }
 
     public string[] getColumnNames(string table) {

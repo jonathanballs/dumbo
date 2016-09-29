@@ -4,5 +4,7 @@ copyright "Copyright © 2016, jonathan"
 authors "jonathan"
 
 dependency "gtk-d" version="~>3.3.1"
-dependency "sqlite-d" version="~>0.1.0"
+dependency "d2sqlite3" version="~>0.9.7"
+libs "sqlite3"
+lflags "-L/usr/include/sqlite3.h"
 
