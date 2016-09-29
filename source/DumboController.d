@@ -32,6 +32,10 @@ class DumboController {
         mainWindow.onNewDatabase();
     }
 
+    public void displayTable(string tableName) {
+        this.mainWindow.recordTreeView.setCurrentTable(tableName);
+    }
+
     public DatabaseBackend getDatabaseBackend() {
         return databaseBackend;
     }

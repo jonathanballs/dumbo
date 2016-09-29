@@ -18,22 +18,33 @@ class SqliteBackend : DatabaseBackend {
     }
 
     public string[] getTableNames() {
-        string statement = "SELECT name FROM sqlite_master WHERE type = 'table'";
-        string[] names;
+        string statement = "SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name";
+        string[] tableNames;
 
         auto db = Database(databaseName);
         ResultRange results = db.execute(statement);
         foreach (Row row; results) {
-            string name = row.peek!string(0);
-            names ~= name;
+            string tableName = row.peek!string(0);
+            tableNames ~= tableName;
         }
         db.close();
 
-        return names;
+        return tableNames;
     }
 
-    public string[] getColumnNames(string table) {
-        return ["pk", "username", "password", "firstname", "lastname"];
+    public string[] getColumnNames(string tableName) {
+        string statement = "PRAGMA table_info(" ~ tableName ~ ")";
+        string[] columnNames;
+        auto db = Database(databaseName);
+
+        ResultRange results = db.execute(statement);
+        foreach (Row row; results) {
+            string columnName = row.peek!string(1);
+            columnNames ~= columnName;
+        }
+        db.close();
+
+        return columnNames;
     }
 }
 

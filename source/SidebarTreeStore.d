@@ -5,6 +5,8 @@ import gtk.TreeIter;
 import gtkc.gobjecttypes;
 
 import Dumbo.DumboController;
+import Dumbo.DumboViewType;
+
 
 class SidebarTreeStore : TreeStore {
 
@@ -23,9 +25,10 @@ class SidebarTreeStore : TreeStore {
         tablesIter = createIter();
         setValue(tablesIter, 0, "Tables");
 
-        TreeIter noneIter;
-        insert(noneIter, tablesIter, 0); 
-        setValue(noneIter, 0, "None");
+        TreeIter treeNoneIter;
+        insert(treeNoneIter, tablesIter, 0); 
+        setValue(treeNoneIter, 0, "None");
+        
 
         // Views
         viewsIter = createIter();
@@ -43,19 +46,19 @@ class SidebarTreeStore : TreeStore {
         TreeIter triggersNoneIter;
         insert(triggersNoneIter, triggersIter, 0); 
         setValue(triggersNoneIter, 0, "None");
+
     }
 
-    public void update() {
+    public void refreshFromDatabase() {
         string[] tableNames = this.controller.getDatabaseBackend().getTableNames();
 
         int i = 0;
         foreach (tableName; tableNames) {
-            TreeIter noneIter;
-            insert(noneIter, tablesIter, 0); 
-            setValue(noneIter, 0, tableName);
+            TreeIter tableNameIter;
+            insert(tableNameIter, tablesIter, -1); 
+            setValue(tableNameIter, 0, tableName);
             i++;
         }
-
     }
 }
 

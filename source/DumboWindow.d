@@ -31,8 +31,8 @@ class DumboWindow : MainWindow {
     RecordListStore recordListStore;
     RecordTreeView recordTreeView;
 
-    this(DumboController mController) {
-        this.controller = mController;
+    this(DumboController controller) {
+        this.controller = controller;
 
         // Set name and size
         super(Constants.programName);
@@ -50,7 +50,7 @@ class DumboWindow : MainWindow {
 
         // Sidebar view
         sidebarTreeStore = new SidebarTreeStore(this.controller);
-        sidebarTreeView = new SidebarTreeView(sidebarTreeStore);
+        sidebarTreeView = new SidebarTreeView(this.controller, sidebarTreeStore);
 
         ScrolledWindow sidebarScroll = new ScrolledWindow();
         sidebarScroll.setSizeRequest(Constants.sidebarMinimumWidth, -1);
@@ -59,7 +59,7 @@ class DumboWindow : MainWindow {
 
         // Records view
         recordListStore = new RecordListStore();
-        recordTreeView = new RecordTreeView(recordListStore);
+        recordTreeView = new RecordTreeView(controller, recordListStore);
         paned.add2(recordTreeView);
 
         mainBox.packStart(paned, true, true, 0);
@@ -110,7 +110,7 @@ class DumboWindow : MainWindow {
 
 
     void onNewDatabase() {
-        sidebarTreeStore.update();
+        sidebarTreeStore.refreshFromDatabase();
     }
 
 }
