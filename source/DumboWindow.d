@@ -20,6 +20,7 @@ import Dumbo.RecordListStore;
 import Dumbo.SidebarTreeStore;
 import Dumbo.SidebarTreeView;
 import Dumbo.DumboController;
+import Dumbo.DbDatabase;
 
 class DumboWindow : MainWindow {
 
@@ -49,7 +50,7 @@ class DumboWindow : MainWindow {
         Paned paned = new Paned(Orientation.HORIZONTAL);
 
         // Sidebar view
-        sidebarTreeStore = new SidebarTreeStore(this.controller);
+        sidebarTreeStore = new SidebarTreeStore();
         sidebarTreeView = new SidebarTreeView(this.controller, sidebarTreeStore);
 
         ScrolledWindow sidebarScroll = new ScrolledWindow();
@@ -108,7 +109,8 @@ class DumboWindow : MainWindow {
     }
 
 
-    void onOpenDatabase() {
+    void onOpenDatabase(DbDatabase dbDatabase) {
+        sidebarTreeStore.setTableNames(dbDatabase.getTableNames());
     }
 
 }

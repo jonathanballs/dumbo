@@ -6,6 +6,7 @@ import Dumbo.DumboWindow;
 import Dumbo.Backends.DatabaseBackend;
 import Dumbo.Backends.SqliteBackend;
 import Dumbo.RecordListStore;
+import Dumbo.DbDatabase;
 import Dumbo.DbTable;
 import Dumbo.DbColumn;
 
@@ -32,7 +33,8 @@ class DumboController {
 
     public void openDatabase(string location) {
         databaseBackend = new SqliteBackend(location);
-        mainWindow.onOpenDatabase();
+        DbDatabase dbDatabase = new DbDatabase(location, databaseBackend.getTableNames());
+        mainWindow.onOpenDatabase(dbDatabase);
     }
 
     public void displayTable(string tableName) {

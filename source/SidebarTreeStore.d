@@ -10,16 +10,15 @@ import Dumbo.DumboViewType;
 
 class SidebarTreeStore : TreeStore {
 
-    DumboController controller;
     TreeIter tablesIter;
     TreeIter viewsIter;
     TreeIter triggersIter;
 
-    this(DumboController mController)
+    this()
     {
+        // We'll only be storing lists of table/view/trigger names
         super([GType.STRING]);
 
-        this.controller = mController;
 
         // Tables
         tablesIter = createIter();
@@ -49,9 +48,7 @@ class SidebarTreeStore : TreeStore {
 
     }
 
-    public void refreshFromDatabase() {
-        string[] tableNames = this.controller.getDatabaseBackend().getTableNames();
-
+    public void setTableNames(string[] tableNames) {
         int i = 0;
         foreach (tableName; tableNames) {
             TreeIter tableNameIter;
