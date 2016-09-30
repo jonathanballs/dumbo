@@ -5,12 +5,18 @@ import gtk.TreeIter;
 import gtkc.gobjecttypes;
 
 import Dumbo.DbTable;
+import Dumbo.DbColumn;
 
 class RecordListStore : ListStore
 {
     this(DbTable table)
     {
-        super([GType.STRING, GType.STRING]);
+        GType[] colTypes;
+        foreach (column; table.getColumns()) {
+            colTypes ~= column.getTypeGType();
+        }
+
+        super(colTypes);
     }
 }
 

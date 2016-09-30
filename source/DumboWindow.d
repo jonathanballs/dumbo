@@ -112,6 +112,5 @@ class DumboWindow : MainWindow {
     void onOpenDatabase(DbDatabase dbDatabase) {
         sidebarTreeStore.setTableNames(dbDatabase.getTableNames());
     }
-
 }
 

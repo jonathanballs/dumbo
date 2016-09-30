@@ -23,7 +23,7 @@ class DbColumn {
     string getName() { return name; }
     DbValueType getType() { return type; }
 
-    GType getTypeGtype() {
+    GType getTypeGType() {
         switch(this.type) {
             case DbValueType.INTEGER:
                 return GType.INT;
