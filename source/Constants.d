@@ -11,5 +11,9 @@ static class Constants {
     static int sidebarMinimumWidth = 200;
     static int sidebarItemVPadding = 6;
     static int sidebarItemHPadding = 6;
+
+    // Sqlite PRAGMA column numbers
+    static int pragmaCNameColumn = 1;
+    static int pragmaCTypeColumn = 2;
 }
 

@@ -58,8 +58,7 @@ class DumboWindow : MainWindow {
         paned.pack1(sidebarScroll, false, false);
 
         // Records view
-        recordListStore = new RecordListStore();
-        recordTreeView = new RecordTreeView(controller, recordListStore);
+        recordTreeView = new RecordTreeView();
         paned.add2(recordTreeView);
 
         mainBox.packStart(paned, true, true, 0);
@@ -109,8 +108,7 @@ class DumboWindow : MainWindow {
     }
 
 
-    void onNewDatabase() {
-        sidebarTreeStore.refreshFromDatabase();
+    void onOpenDatabase() {
     }
 
 }

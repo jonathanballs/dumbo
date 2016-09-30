@@ -7,19 +7,12 @@ import gtk.CellRendererText;
 import gtk.ListStore;
 
 import Dumbo.DumboController;
+import Dumbo.DbTable;
 
 class RecordTreeView : TreeView
 {
 
-    DumboController controller;
-
-    this(DumboController controller, ListStore store)
-    {
-        this.controller = controller;
-        setModel(store);
-    }
-
-    public void setCurrentTable(string tableName) {
+    public void setCurrentTable(DbTable table) {
 
         // Remove old columns
         int noColumns = getNColumns();
@@ -29,7 +22,7 @@ class RecordTreeView : TreeView
         }
 
         size_t i = 0;
-        foreach (columnName; controller.getDatabaseBackend().getColumnNames(tableName)) {
+        foreach (columnName; table.getColumnNames()) {
             TreeViewColumn newColumn = new TreeViewColumn(
                     columnName, new CellRendererText(), "text", 0);
             appendColumn(newColumn);

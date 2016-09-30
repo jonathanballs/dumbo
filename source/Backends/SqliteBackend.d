@@ -2,8 +2,12 @@ module Dumbo.Backends.SqliteBackend;
 
 import std.typecons : Nullable;
 import std.stdio;
+import std.string;
 import d2sqlite3;
 import Dumbo.Backends.DatabaseBackend;
+import Dumbo.DbTable;
+import Dumbo.DbColumn;
+import Dumbo.Constants;
 
 class SqliteBackend : DatabaseBackend {
 
@@ -32,19 +36,54 @@ class SqliteBackend : DatabaseBackend {
         return tableNames;
     }
 
-    public string[] getColumnNames(string tableName) {
-        string statement = "PRAGMA table_info(" ~ tableName ~ ")";
-        string[] columnNames;
+    public DbTable getTable(string tableName) {
+        return new DbTable(tableName, this.getColumns(tableName));
+    }
+
+    public DbColumn[] getColumns(string tableName) {
+        DbColumn[] columns;
         auto db = Database(databaseName);
 
+        string statement = "PRAGMA table_info(" ~ tableName ~ ")";
         ResultRange results = db.execute(statement);
+
         foreach (Row row; results) {
-            string columnName = row.peek!string(1);
-            columnNames ~= columnName;
+            string columnName = row.peek!string(Constants.pragmaCNameColumn);
+            string columnTypeString = row.peek!string(Constants.pragmaCTypeColumn);
+            columnTypeString = columnTypeString.toLower();
+
+            // Parse dataType to basic type affinities
+            DbValueType columnType;
+            if (columnTypeString.indexOf("int") >= 0) {
+                columnType = DbValueType.INTEGER;
+            }
+            else if (columnTypeString.indexOf("char") >= 0
+                    || columnTypeString.indexOf("clob") >= 0
+                    || columnTypeString.indexOf("text") >= 0) {
+
+                columnType = DbValueType.TEXT;
+            }
+            else if (columnTypeString.indexOf("blob") >= 0) {
+
+                columnType = DbValueType.BLOB;
+            }
+            else if (columnTypeString.indexOf("real") >= 0
+                    || columnTypeString.indexOf("floa") >= 0
+                    || columnTypeString.indexOf("doub") >= 0) {
+
+                columnType = DbValueType.REAL;
+            }
+            else {
+
+                columnType = DbValueType.TEXT;
+            }
+
+            columns ~= new DbColumn(columnName, columnType);
+
         }
         db.close();
 
-        return columnNames;
+        return columns;
     }
 }
 

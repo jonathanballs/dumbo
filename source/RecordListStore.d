@@ -1,21 +1,16 @@
 module Dumbo.RecordListStore;
 
-private import gtk.ListStore;
-private import gtk.TreeIter;
-private import gtkc.gobjecttypes;
+import gtk.ListStore;
+import gtk.TreeIter;
+import gtkc.gobjecttypes;
+
+import Dumbo.DbTable;
 
 class RecordListStore : ListStore
 {
-    this()
+    this(DbTable table)
     {
         super([GType.STRING, GType.STRING]);
-    }
-    
-    public void addCountry(in string name, in string capital)
-    {
-        TreeIter iter = createIter();
-        setValue(iter, 0, name);
-        setValue(iter, 1, capital);
     }
 }
 
