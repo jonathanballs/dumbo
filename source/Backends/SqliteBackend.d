@@ -85,5 +85,26 @@ class SqliteBackend : DatabaseBackend {
 
         return columns;
     }
+
+    public string[][] getRows(string tableName) {
+        string statement = "SELECT * FROM " ~ tableName ~ " ORDER BY rowid ASC";
+        string[][] rows;
+
+        auto db = Database(databaseName);
+        ResultRange results = db.execute(statement);
+
+        int numberOfColumns = cast(int)this.getColumns(tableName).length;
+
+        foreach (Row row; results) {
+            string[] rowValues;
+            foreach (i; 0..numberOfColumns) {
+                rowValues[i] = row.peek!string(i);
+            }
+            rows ~= rowValues;
+        }
+        db.close();
+
+        return rows;
+    }
 }
 

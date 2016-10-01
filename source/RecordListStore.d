@@ -17,6 +17,7 @@ class RecordListStore : ListStore
         }
 
         super(colTypes);
+
     }
 }
 
