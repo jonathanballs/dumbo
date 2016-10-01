@@ -37,7 +37,9 @@ class SqliteBackend : DatabaseBackend {
     }
 
     public DbTable getTable(string tableName) {
-        return new DbTable(tableName, this.getColumns(tableName));
+        auto table = new DbTable(tableName, this.getColumns(tableName));
+        table.setRows(this.getRows(tableName));
+        return table;
     }
 
     public DbColumn[] getColumns(string tableName) {
@@ -97,8 +99,8 @@ class SqliteBackend : DatabaseBackend {
 
         foreach (Row row; results) {
             string[] rowValues;
-            foreach (i; 0..numberOfColumns) {
-                rowValues[i] = row.peek!string(i);
+            foreach (i; 0 .. numberOfColumns) {
+                rowValues ~= row.peek!string(i);
             }
             rows ~= rowValues;
         }

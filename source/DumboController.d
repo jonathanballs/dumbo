@@ -1,6 +1,7 @@
 module Dumbo.DumboController;
 
 import gtk.Main;
+import std.stdio;
 
 import Dumbo.DumboWindow;
 import Dumbo.Backends.DatabaseBackend;
@@ -38,7 +39,16 @@ class DumboController {
     }
 
     public void displayTable(string tableName) {
-        DbTable table = databaseBackend.getTable(tableName);
+        DbTable table;
+
+        try {
+            table = databaseBackend.getTable(tableName);
+        }
+        catch (Exception ex) {
+            writeln("Error opening table `" ~ tableName ~ "`. Aborting!");
+            return;
+        }
+
         this.mainWindow.recordListStore = new RecordListStore(table);
         this.mainWindow.recordTreeView.setCurrentTable(table);
     }

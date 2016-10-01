@@ -15,4 +15,8 @@ interface DatabaseBackend {
 
     // Get list of columns
     public DbColumn[] getColumns(string tableName);
+
+    // Get row data as strings
+    public string[][] getRows(string tableName);
 }
+
