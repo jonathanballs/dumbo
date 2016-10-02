@@ -51,6 +51,7 @@ class DumboController {
 
         this.mainWindow.recordListStore = new RecordListStore(table);
         this.mainWindow.recordTreeView.setCurrentTable(table);
+        this.mainWindow.recordTreeView.setModel(this.mainWindow.recordListStore);
     }
 
     public DatabaseBackend getDatabaseBackend() {

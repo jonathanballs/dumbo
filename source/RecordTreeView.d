@@ -21,13 +21,10 @@ class RecordTreeView : TreeView
             removeColumn(column);
         }
 
-        size_t i = 0;
-        foreach (columnName; table.getColumnNames()) {
+        foreach (int i, columnName; table.getColumnNames()) {
             TreeViewColumn newColumn = new TreeViewColumn(
-                    columnName, new CellRendererText(), "text", 0);
+                    columnName, new CellRendererText(), "text", i);
             appendColumn(newColumn);
-
-            i++;
         }
     }
 }
