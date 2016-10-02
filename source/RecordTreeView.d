@@ -24,6 +24,7 @@ class RecordTreeView : TreeView
         foreach (int i, columnName; table.getColumnNames()) {
             TreeViewColumn newColumn = new TreeViewColumn(
                     columnName, new CellRendererText(), "text", i);
+            newColumn.setResizable(true);
             appendColumn(newColumn);
         }
     }
