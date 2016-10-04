@@ -54,9 +54,12 @@ class DumboController {
         this.mainWindow.recordTreeView.setModel(this.mainWindow.recordListStore);
     }
 
+    public void quit() {
+        Main.quit();
+    }
+
     public DatabaseBackend getDatabaseBackend() {
         return databaseBackend;
     }
-
 }
 

@@ -78,8 +78,10 @@ class DumboWindow : MainWindow {
 
         this.menuBar = new MenuBar();
         Menu fileMenu = menuBar.append("_File");
-        fileMenu.append(new MenuItem(&onMenuActivate, "_Connect...",
-                    "file.connect", true, accelGroup, 'c'));
+        fileMenu.append(new MenuItem(&onMenuActivate, "_Open...",
+                    "file.connect", true, accelGroup, 'o'));
+        fileMenu.append(new MenuItem(&onMenuActivate, "E_xit...",
+                    "file.exit", true, accelGroup, 'w'));
 
         return this.menuBar;
     }
@@ -101,6 +103,10 @@ class DumboWindow : MainWindow {
                 string fileName = dialog.getFilename();
                 writeln("Opened " ~ fileName);
 
+                break;
+
+            case "file.exit":
+                this.controller.quit();
                 break;
             
             default:
