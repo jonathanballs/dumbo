@@ -1,5 +1,7 @@
 module Dumbo.SidebarTreeStore;
 
+import std.stdio;
+
 import gtk.TreeStore;
 import gtk.TreeIter;
 import gtkc.gobjecttypes;
@@ -23,11 +25,7 @@ class SidebarTreeStore : TreeStore {
         // Tables
         tablesIter = createIter();
         setValue(tablesIter, 0, "Tables");
-
-        TreeIter treeNoneIter;
-        insert(treeNoneIter, tablesIter, 0); 
-        setValue(treeNoneIter, 0, "None");
-        
+        this.setTableNames(["None"]);
 
         // Views
         viewsIter = createIter();
@@ -49,12 +47,20 @@ class SidebarTreeStore : TreeStore {
     }
 
     public void setTableNames(string[] tableNames) {
-        int i = 0;
-        foreach (tableName; tableNames) {
+
+        // Remove old table names
+        TreeIter oldTableName;
+        writeln(this.iterNChildren(tablesIter));
+        foreach(i; 0 .. this.iterNChildren(tablesIter)) {
+            iterNthChild(oldTableName, tablesIter, i);
+            this.remove(oldTableName);
+        }
+
+
+        foreach (int i, tableName; tableNames) {
             TreeIter tableNameIter;
             insert(tableNameIter, tablesIter, -1); 
             setValue(tableNameIter, 0, tableName);
-            i++;
         }
     }
 }
