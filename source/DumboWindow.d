@@ -97,11 +97,12 @@ class DumboWindow : MainWindow {
                         FileChooserAction.OPEN,
                         ["Open", "Cancel"],
                         [ResponseType.OK, ResponseType.CANCEL]);
-                dialog.run();
+                auto res = dialog.run();
+                if (res == ResponseType.OK) {
+                    string fileName = dialog.getFilename();
+                    this.controller.openDatabase(fileName);
+                }
                 dialog.hide();
-
-                string fileName = dialog.getFilename();
-                writeln("Opened " ~ fileName);
 
                 break;
 

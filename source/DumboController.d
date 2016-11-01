@@ -23,7 +23,8 @@ class DumboController {
         mainWindow = new DumboWindow(this);
         mainWindow.showAll();
 
-        openDatabase("dev.db");
+        if (args.length == 2)
+            this.openDatabase(args[1]);
 
         Main.run();
     }
