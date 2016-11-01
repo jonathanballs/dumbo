@@ -1,7 +1,5 @@
 module Dumbo.SidebarTreeStore;
 
-import std.stdio;
-
 import gtk.TreeStore;
 import gtk.TreeIter;
 import gtkc.gobjecttypes;
@@ -50,7 +48,6 @@ class SidebarTreeStore : TreeStore {
 
         // Remove old table names
         TreeIter oldTableName;
-        writeln(this.iterNChildren(tablesIter));
         foreach(i; 0 .. this.iterNChildren(tablesIter)) {
             iterNthChild(oldTableName, tablesIter, i);
             this.remove(oldTableName);
