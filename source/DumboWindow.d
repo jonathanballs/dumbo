@@ -63,7 +63,7 @@ class DumboWindow : MainWindow {
         ScrolledWindow recordsScroll = new ScrolledWindow();
         recordsScroll.add(recordTreeView);
         recordsScroll.setSizeRequest(Constants.windowDefaultWidth - Constants.sidebarMinimumWidth, -1);
-        paned.pack2(recordsScroll, false, false);
+        paned.pack2(recordsScroll, false, true);
 
         mainBox.packStart(paned, true, true, 0);
 
